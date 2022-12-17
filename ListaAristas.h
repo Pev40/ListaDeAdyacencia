@@ -3,43 +3,46 @@
 #include "Arista.h"
 #include <iostream>
 using namespace std;
+template<class R>
 class ListaAristas
 {
 private:
-    Arista* head;
+    Arista<R>* head;
 public:
     ListaAristas();
-    void add(int);
-    void deleteA(int);
-    bool search(int);
+    void add(R);
+    void deleteA(R);
+    bool search(R);
     void print();
     string values();
     ~ListaAristas();
 };
 
-ListaAristas::ListaAristas()
+template<class R>
+ListaAristas<R>::ListaAristas()
 {
     this->head=nullptr;
 }
 
-void ListaAristas::add(int NuevaArista){
+template<class R>
+void ListaAristas<R>::add(R NuevaArista){
     if(this->head==nullptr){
-        Arista* nuevo = new Arista(NuevaArista);
+        Arista<R>* nuevo = new Arista<R>(NuevaArista);
         this->head=nuevo;
         return;
     }
-    Arista* auxiliar = head;
+    Arista<R>* auxiliar = head;
     while (true)
     {
         if(auxiliar->getNext() == nullptr){
-            Arista* nuevo = new Arista(NuevaArista);
+            Arista<R>* nuevo = new Arista<R>(NuevaArista);
             auxiliar->setNext(nuevo);
             return;
         }
         if(auxiliar->getNext()!=nullptr){
             if(auxiliar->getNext()->getDato()==NuevaArista){return;}
             if(auxiliar->getNext()->getDato()>NuevaArista){
-                Arista* nuevo = new Arista(NuevaArista);
+                Arista<R>* nuevo = new Arista<R>(NuevaArista);
                 nuevo->setNext(auxiliar->getNext());
                 auxiliar->setNext(nuevo);
                 return;
@@ -50,8 +53,9 @@ void ListaAristas::add(int NuevaArista){
     return;
 }
 
-bool ListaAristas::search(int BuscarArista){
-    Arista* auxiliar = head;
+template<class R>
+bool ListaAristas<R>::search(R BuscarArista){
+    Arista<R>* auxiliar = head;
     while (auxiliar!=nullptr)
     {
         //std::cout<<auxiliar->getDato();
@@ -64,16 +68,17 @@ bool ListaAristas::search(int BuscarArista){
     return false;
 }
 
-void ListaAristas::deleteA(int AristaEliminar){
+template<class R>
+void ListaAristas<R>::deleteA(R AristaEliminar){
     if(head==nullptr){ return;}
     if(head->getDato()==AristaEliminar){
-        Arista* auxiliarelim = head;
+        Arista<R>* auxiliarelim = head;
         head=head->getNext();
         auxiliarelim->eliminar();
         delete[] auxiliarelim;
         return;
     }   
-    Arista* auxiliar = head;
+    Arista<R>* auxiliar = head;
     if (search(AristaEliminar)==true)
 {
     while (auxiliar!=nullptr )
@@ -86,13 +91,13 @@ void ListaAristas::deleteA(int AristaEliminar){
     }
 
     if(auxiliar->getNext()->getNext()==nullptr){
-        Arista* auxiliarelim = auxiliar->getNext();
+        Arista<R>* auxiliarelim = auxiliar->getNext();
         auxiliar->eliminar();
         auxiliarelim->eliminar();
         delete[] auxiliarelim;
         return;
     }
-    Arista* auxiliarelim = auxiliar->getNext();
+    Arista<R>* auxiliarelim = auxiliar->getNext();
     auxiliar->setNext(auxiliar->getNext()->getNext());
     auxiliarelim->eliminar();
     delete[] auxiliarelim;
@@ -101,10 +106,11 @@ void ListaAristas::deleteA(int AristaEliminar){
 return;
 }
 
-void ListaAristas::print(){
+template<class R>
+void ListaAristas<R>::print(){
    // std::cout<<"Aqui en imprimir";
     if (head==nullptr){std::cout<<"No existen Aristas"; return; }
-    Arista* auxiliar = head;    
+    Arista<R>* auxiliar = head;    
     while (auxiliar!=nullptr)
     {
         std::cout<<auxiliar->getDato()<<" -> ";
@@ -112,10 +118,11 @@ void ListaAristas::print(){
     }
     
 }
-string ListaAristas::values(){
+template<class R>
+string ListaAristas<R>::values(){
     string salida = "";
     if (head==nullptr){std::cout<<"No existen Aristas"; return salida; }
-    Arista* auxiliar = head;    
+    Arista<R>* auxiliar = head;    
     while (auxiliar!=nullptr)
     {
         string num_cstr(std::to_string(auxiliar->getDato()));
@@ -126,7 +133,8 @@ string ListaAristas::values(){
      return salida;
 }
 
-ListaAristas::~ListaAristas()
+template<class R>
+ListaAristas<R>::~ListaAristas()
 {
 }
 

@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    Vertice p = Vertice(3);    
+    Vertice<float> p = Vertice<float>(3);    
    // ListaAristas p = ListaAristas();
     p.add(1);
     p.add(10);

@@ -6,30 +6,34 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
+template<class U>
 class Grafo
 {
 private:
-    Vertice *head;
-    void insertArista(int V1,int V2);
-    void insertVertice(int V1);    
+    Vertice<U> *head;
+    void insertArista(U V1,U V2);
+    void insertVertice(U V1);    
 public:
     Grafo();
     void print();
-    void insert(int V1,int V2);
-    bool search(int);
-    Vertice *searchVertice(int);
+    void insert(U V1,U V2);
+    bool search(U);
+    Vertice<U> *searchVertice(U);
     string view();
     void grafhic();
     ~Grafo();
 };
 
-Grafo::Grafo()
+template<class U>
+Grafo<U>::Grafo()
 {
     head = nullptr;
 }
 
-bool Grafo::search(int Valor){
-    Vertice* auxiliar = this->head;
+template<class U>
+bool Grafo<U>::search(U Valor){
+    Vertice<U>* auxiliar = this->head;
     while (auxiliar!=nullptr)
     {
         //std::cout<<auxiliar->getDato();
@@ -42,9 +46,9 @@ bool Grafo::search(int Valor){
     return false;
 }
 
-
-Vertice* Grafo::searchVertice(int Valor){
-    Vertice* auxiliar = this->head;
+template<class U>
+Vertice<U>* Grafo<U>::searchVertice(U Valor){
+    Vertice<U>* auxiliar = this->head;
     while (auxiliar!=nullptr)
     {
         //std::cout<<auxiliar->getDato();
@@ -57,24 +61,24 @@ Vertice* Grafo::searchVertice(int Valor){
     return nullptr;
 }
 
-
-void Grafo::insertVertice(int NuevaVertice){
+template<class U>
+void Grafo<U>::insertVertice(U NuevaVertice){
     if(this->head==nullptr){
-        Vertice* nuevo = new Vertice(NuevaVertice);
+        Vertice<U>* nuevo = new Vertice<U>(NuevaVertice);
         this->head=nuevo;
         return;
     }
-    Vertice* auxiliar = head;
+    Vertice<U>* auxiliar = head;
     while (true)
     {
         if(auxiliar->getNext() == nullptr){
-            Vertice* nuevo = new Vertice(NuevaVertice);
+            Vertice<U>* nuevo = new Vertice<U>(NuevaVertice);
             auxiliar->setNext(nuevo);
             return;
         }
         if(auxiliar->getNext()!=nullptr){
             if(auxiliar->getNext()->getValor()>NuevaVertice){
-                Vertice* nuevo = new Vertice(NuevaVertice);
+                Vertice<U>* nuevo = new Vertice<U>(NuevaVertice);
                 nuevo->setNext(auxiliar->getNext());
                 auxiliar->setNext(nuevo);
                 return;
@@ -85,19 +89,19 @@ void Grafo::insertVertice(int NuevaVertice){
     return;
 }
 
-
-void Grafo::insertArista(int V1,int V2){
+template<class U>
+void Grafo<U>::insertArista(U V1,U V2){
     if(head==nullptr){
         std::cout<<"Primer Insertado"<<std::endl;
-        Vertice* Nuevo1 = new Vertice(V1);
-        Vertice* Nuevo2 = new Vertice(V2);
+        Vertice<U>* Nuevo1 = new Vertice<U>(V1);
+        Vertice<U>* Nuevo2 = new Vertice<U>(V2);
         head=Nuevo1;
         head->setNext(Nuevo2);
         Nuevo1->add(V2);
         Nuevo2->add(V1);
         return;
     }
-    Vertice* auxiliar = head;
+    Vertice<U>* auxiliar = head;
     if (search(V1)==true)
     {
         auxiliar = this->searchVertice(V1);
@@ -121,13 +125,10 @@ void Grafo::insertArista(int V1,int V2){
         auxiliar = this->searchVertice(V2);
         auxiliar->add(V1);
     }   
-    
-    
-    
-
 }
 
-void Grafo::insert(int V1,int V2){
+template<class U>
+void Grafo<U>::insert(U V1,U V2){
     if(V1>V2){
         int aux=V1;
         V2=V1;
@@ -136,8 +137,9 @@ void Grafo::insert(int V1,int V2){
     insertArista(V1,V2);
 }
 
-void Grafo::print(){
-    Vertice* p = head;
+template<class U>
+void Grafo<U>::print(){
+    Vertice<U>* p = head;
     while (p!=nullptr)
     {
         p->print();
@@ -147,13 +149,14 @@ void Grafo::print(){
     
 }
 
-string Grafo::view(){
+template<class U>
+string Grafo<U>::view(){
     string salida = "";
     if (head==nullptr)
     {
         return salida;
     }
-    Vertice* verticeN = head;
+    Vertice<U>* verticeN = head;
     salida += "graph CS {";
     while (verticeN!=nullptr)
     {
@@ -164,7 +167,8 @@ string Grafo::view(){
     return salida;
 }
 
-void Grafo::grafhic(){
+template<class U>
+void Grafo<U>::grafhic(){
   ofstream file;
   file.open("./salida1.dot");
   string data = this->view();
@@ -176,7 +180,8 @@ void Grafo::grafhic(){
   return;
 }
 
-Grafo::~Grafo()
+template<class U>
+Grafo<U>::~Grafo()
 {
 }
 

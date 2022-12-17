@@ -1,36 +1,44 @@
 #ifndef __ARISTA_H__
 #define __ARISTA_H__
 
+template<class T>
 class Arista
 {
 private:
-    int Dato;
-    Arista* next=nullptr;
+    T Dato;
+    Arista<T>* next=nullptr;
 public:
-    Arista(int);
+    Arista(T);
     ~Arista();
     int getDato();
-    void setDato(int);
+    void setDato(T);
     void eliminar();
-    Arista* getNext();
-    void setNext(Arista*);
+    Arista<T>* getNext();
+    void setNext(Arista<T>*);
 };
 
-Arista::Arista(int DatoNuevo)
+template<class T>
+Arista<T>::Arista(T DatoNuevo)
 {
     this->Dato=DatoNuevo;
 }
-void Arista::setDato(int DatoNuevo){this->Dato=DatoNuevo;  return;}
+template<class T>
+void Arista<T>::setDato(T DatoNuevo){this->Dato=DatoNuevo;  return;}
 
-void Arista::setNext(Arista* NuevoArista){this->next=NuevoArista;  return;}
+template<class T>
+void Arista<T>::setNext(Arista<T>* NuevoArista){this->next=NuevoArista;  return;}
 
-int Arista::getDato(){return this->Dato;}
+template<class T>
+int Arista<T>::getDato(){return this->Dato;}
 
-void Arista::eliminar(){this->next=nullptr;return;}
+template<class T>
+void Arista<T>::eliminar(){this->next=nullptr;return;}
 
-Arista* Arista::getNext(){return this->next;}
+template<class T>
+Arista<T>* Arista<T>::getNext(){return this->next;}
 
-Arista::~Arista()
+template<class T>
+Arista<T>::~Arista()
 {}
 
 #endif

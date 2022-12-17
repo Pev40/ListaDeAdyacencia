@@ -3,56 +3,64 @@
 #include "ListaAristas.h"
 #include <sstream>
 
-
+template<class S>
 class Vertice
 {
 private:
-    int valor;
+    S valor;
     int dimension;
-    ListaAristas *head;
-    Vertice *next;
+    ListaAristas<S> *head;
+    Vertice<S>*next;
 public:
-    Vertice(int);
-    ListaAristas* getLista();
-    Vertice* getNext();
+    Vertice(S);
+    ListaAristas<S>* getLista();
+    Vertice<S>* getNext();
     int getValor();
-    void setNext(Vertice*);
+    void setNext(Vertice<S>*);
     string stringEnd();
     ~Vertice();
     void cout();
     void print();
-    void add(int);
-    void deleteA(int);
+    void add(S);
+    void deleteA(S);
 };
 
-Vertice::Vertice(int NuevoV)
+template<class S>
+Vertice<S>::Vertice(S NuevoV)
 {
     this->dimension=0;
     this->valor=NuevoV;
-    this->head=new ListaAristas();
+    this->head=new ListaAristas<S>();
     this->next=nullptr;
 }
 
-void Vertice::add(int ValorA){   
+template<class S>
+void Vertice<S>::add(S ValorA){   
     if(this->head->search(ValorA)==true || ValorA==this->getValor()){return;}
     this->head->add(ValorA); this->dimension+=1;  
     return;}
 
-void Vertice::deleteA(int ValorA){
+template<class S>
+void Vertice<S>::deleteA(S ValorA){
     if(this->head->search(ValorA)==true){
         this->head->deleteA(ValorA); this->dimension-=1; 
     }
     return;}
 
-void Vertice::cout(){std::cout<<"Dimension: "<<this->dimension;}
+template<class S>
+void Vertice<S>::cout(){std::cout<<"Dimension: "<<this->dimension;}
 
-void Vertice::print(){std::cout<<this->valor<<": ";  this->head->print(); return;}
+template<class S>
+void Vertice<S>::print(){std::cout<<this->valor<<": ";  this->head->print(); return;}
 
-void Vertice::setNext(Vertice* nuevo){this->next=nuevo;return;}
+template<class S>
+void Vertice<S>::setNext(Vertice<S>* nuevo){this->next=nuevo;return;}
 
-int Vertice::getValor(){return this->valor;}
+template<class S>
+int Vertice<S>::getValor(){return this->valor;}
 
-string Vertice::stringEnd(){
+template<class S>
+string Vertice<S>::stringEnd(){
     if(head==nullptr){return "";}
     string cadenaValores = head->values();
     int i =0;
@@ -75,11 +83,14 @@ string Vertice::stringEnd(){
     return salida;
 }
 
-ListaAristas* Vertice::getLista(){return this->head;}
+template<class S>
+ListaAristas<S>* Vertice<S>::getLista(){return this->head;}
 
-Vertice* Vertice::getNext(){return this->next;}
+template<class S>
+Vertice<S>* Vertice<S>::getNext(){return this->next;}
 
-Vertice::~Vertice()
+template<class S>
+Vertice<S>::~Vertice()
 {
 }
 
