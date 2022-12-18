@@ -51,7 +51,7 @@ template<class S>
 void Vertice<S>::cout(){std::cout<<"Dimension: "<<this->dimension;}
 
 template<class S>
-void Vertice<S>::print(){std::cout<<this->valor<<": ";  this->head->print(); return;}
+void Vertice<S>::print(){std::cout<<S(this->valor)<<": ";  this->head->print(); return;}
 
 template<class S>
 void Vertice<S>::setNext(Vertice<S>* nuevo){this->next=nuevo;return;}

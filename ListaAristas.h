@@ -113,7 +113,7 @@ void ListaAristas<R>::print(){
     Arista<R>* auxiliar = head;    
     while (auxiliar!=nullptr)
     {
-        std::cout<<auxiliar->getDato()<<" -> ";
+        std::cout<<R(auxiliar->getDato())<<" -> ";
         auxiliar=auxiliar->getNext();
     }
     

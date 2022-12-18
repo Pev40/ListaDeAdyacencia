@@ -5,7 +5,31 @@
 using namespace std;
 
 int main(){
-    Vertice<float> p = Vertice<float>(3);    
+   Vertice<char> p = Vertice<char>('a');    
+   // ListaAristas p = ListaAristas();
+    p.add('b');
+    p.add('c');
+    p.add('d');
+    p.add('h');
+    p.add('i');
+    p.add('z');
+    p.add('p');
+    p.add('w');
+    p.add('t');
+    p.add('k');
+    p.add('r');
+    p.print();
+  //  cout<<p.values()<<endl;
+    cout<<endl;
+    p.deleteA('a');
+    p.deleteA('z');
+    p.deleteA('t');
+    p.deleteA('r');
+    cout<<endl;
+    p.print();
+    p.cout();
+  /*
+    Vertice<int> p = Vertice<int>(3);    
    // ListaAristas p = ListaAristas();
     p.add(1);
     p.add(10);
@@ -27,7 +51,7 @@ int main(){
     p.deleteA(1);
     cout<<endl;
     p.print();
-    p.cout();    
+    p.cout();*/  
   /*  Grafo p = Grafo();
     p.insert(1,2);
     cout<<"---------------"<<endl;
